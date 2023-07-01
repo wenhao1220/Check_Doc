@@ -4,8 +4,9 @@ from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import matplotlib.pyplot as plt
 
 if __name__ == '__main__':
-    model = AutoModelForSequenceClassification.from_pretrained("Hello-SimpleAI/chatgpt-detector-roberta-chinese")
-    tokenizer = AutoTokenizer.from_pretrained("Hello-SimpleAI/chatgpt-detector-roberta-chinese")
+    if 'tokenizer' not in st.session_state:
+        st.session_state.model = AutoModelForSequenceClassification.from_pretrained("Hello-SimpleAI/chatgpt-detector-roberta-chinese")
+        st.session_state.tokenizer = AutoTokenizer.from_pretrained("Hello-SimpleAI/chatgpt-detector-roberta-chinese")
   
     st.title('AI文件鑑識系統')
     
@@ -14,10 +15,10 @@ if __name__ == '__main__':
     context = st.text_area('請輸入資料', value = text, height = 160)
     
     if st.button('送出'):
-        inputs = tokenizer(context, return_tensors="pt")
+        inputs = st.session_state.tokenizer(context, return_tensors="pt")
 
         # Classify the text
-        outputs = model(**inputs)
+        outputs = st.session_state.model(**inputs)
         logits = outputs.logits
         predicted_prob_ai = torch.softmax(logits, dim=1)[0][1].item()
         predicted_prob_human = torch.softmax(logits, dim=1)[0][0].item()
