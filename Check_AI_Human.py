@@ -3,11 +3,10 @@ import torch
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import matplotlib.pyplot as plt
 
-tokenizer = AutoTokenizer.from_pretrained("Hello-SimpleAI/chatgpt-detector-roberta-chinese")
-model = AutoModelForSequenceClassification.from_pretrained("Hello-SimpleAI/chatgpt-detector-roberta-chinese")
-
 if __name__ == '__main__':
-        
+    model = AutoModelForSequenceClassification.from_pretrained("Hello-SimpleAI/chatgpt-detector-roberta-chinese")
+    tokenizer = AutoTokenizer.from_pretrained("Hello-SimpleAI/chatgpt-detector-roberta-chinese")
+  
     st.title('AI文件鑑識系統')
     
     text = '''在一座偏遠的小島上，住著一位年輕的漁夫。他夢想著航向遠方，探索未知的海洋有一天，他踏上了冒險之旅，途中遇見了一隻受傷的海龜。漁夫懷著同情心照料牠，並放牠回海中。沒想到，海龜化身為一位仙人，感激漁夫的善舉。仙人賜予漁夫神奇的航海能力，並預言他將成為傳奇船長。漁夫回到小島，開始帶領勇敢的水手展開冒險，成為島嶼上傳頌的英雄。'''
